@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spaprice_array">
+        <item>basic   $50   </item>
+        <item>milk    $100  </item>
+        <item>honey   $150  </item>
+        <item>special $200  </item>
+    </string-array>
+     <string-array name="food_array">
+        <item>Chinese food   </item>
+        <item>Western food  </item>
+        <item>Fast food  </item>
+        <item>Drink  </item>
+    </string-array>
+    <string-array name="room_array">
+        <item>Single</item>
+        <item>Double</item>
+        <item>Twin</item>
+        <item>King</item>
+        <item>Queen</item>
+    </string-array>
+
+</resources>

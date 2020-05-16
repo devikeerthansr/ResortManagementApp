@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     >
+
+    <View
+        android:id="@+id/dummyview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#50000000" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="55dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/table_header"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="13dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp" >
+
+
+
+            <TextView
+                android:id="@+id/txt_header_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:gravity="left|center"
+                android:text="Are You Sure?"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_layout"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:padding="20dp" >
+   <TextView
+                        android:id="@+id/txt_message"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:textSize="30sp"
+                        android:textColor="@android:color/white"
+                        android:layout_height="wrap_content"
+                        android:text="Logout From The Application?" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="30dp"
+                        android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                android:background="@color/dark_gray" >
+            </View>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/yesbtn"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0.01"
+                    style="@style/ButtonStyle"
+                    android:gravity="center"
+                    android:text="Yes"
+                    android:textColor="@android:color/white"
+                    android:textSize="27sp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/dark_gray" >
+                </View>
+
+                <Button
+                    android:id="@+id/nobtn"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0.01"
+                    style="@style/ButtonStyle"
+                    android:gravity="center"
+                    android:text="No"
+                    android:textColor="@android:color/white"
+                    android:textSize="27sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,222 @@
+.echo ON
+.mode list
+.separator "  |  "
+.output mis571.db
+PRAGMA foreign_keys = ON;
+
+DROP TABLE IF EXISTS Customer;
+DROP TABLE IF EXISTS Amenity;
+DROP TABLE IF EXISTS SPA;
+DROP TABLE IF EXISTS Restaurant;
+DROP TABLE IF EXISTS Excursion;
+DROP TABLE IF EXISTS RoomType;
+DROP TABLE IF EXISTS Room;
+DROP TABLE IF EXISTS Booking;
+DROP TABLE IF EXISTS RepairRoom;
+DROP TABLE IF EXISTS OrderAmn;
+
+CREATE TABLE Customer (
+custID INTEGER CONSTRAINT custID_pk PRIMARY KEY,
+custLName VARCHAR(25) NOT NULL,
+custFName VARCHAR(25) NOT NULL,
+custInitial VARCHAR(25) NOT NULL,
+custPhone VARCHAR(25) NOT NULL,
+custUsername VARCHAR(25) NOT NULL,
+custPassword VARCHAR(25) NOT NULL,
+custPay VARCHAR(25) NOT NULL );
+
+CREATE TABLE Amenity (
+amID CHAR(10) CONSTRAINT amID_pk PRIMARY KEY,
+amType VARCHAR(25) NOT NULL );
+
+CREATE TABLE SPA (
+amID CHAR(10) CONSTRAINT amID_pk PRIMARY KEY CONSTRAINT amID_fk REFERENCES Amenity(amID),
+spaDesc VARCHAR(25) NOT NULL,
+spaprice DECIMAL(6,4) NOT NULL );
+
+CREATE TABLE Restaurant (
+amID CHAR(10) CONSTRAINT amID_pk PRIMARY KEY CONSTRAINT amID_fk REFERENCES Amenity(amID),
+resTableID CHAR(10) NOT NULL,
+tableDesc VARCHAR(25) NOT NULL );
+
+CREATE TABLE Excursion (
+amID CHAR(10) CONSTRAINT amID_pk PRIMARY KEY CONSTRAINT amID_fk REFERENCES Amenity(amID),
+excDesc VARCHAR(25) NOT NULL,
+ excPrice DECIMAL(6,4) NOT NULL );
+
+CREATE TABLE RoomType (
+typeID CHAR(10) CONSTRAINT typeID_pk PRIMARY KEY,
+typeDesc VARCHAR(25) NOT NULL,
+typePrice DECIMAL(6,4) NOT NULL );
+
+CREATE TABLE Room (
+roomNum CHAR(10) CONSTRAINT roomNum_pk PRIMARY KEY,
+typeID CHAR(10) CONSTRAINT typeID_fk REFERENCES RoomType(typeID) );
+
+CREATE TABLE Booking (
+bookID INTEGER CONSTRAINT bookID_pk PRIMARY KEY,
+bookCheckIn DATE NOT NULL,
+bookCheckOut DATE NOT NULL,
+CustID INTEGER CONSTRAINT custID_fk REFERENCES Customer(CustID),
+roomNum CHAR(10) CONSTRAINT roomNum_fk REFERENCES Room(roomNum) );
+
+CREATE TABLE RepairRoom (
+repairID INTEGER CONSTRAINT repairID_pk PRIMARY KEY,
+repDesc VARCHAR(25) NOT NULL,
+bookID INTEGER CONSTRAINT bookID_fk REFERENCES Booking(bookID) );
+
+CREATE TABLE OrderAmn (
+orderID INTEGER CONSTRAINT orderID_pk PRIMARY KEY,
+orderDate DATETIME NOT NULL,
+serviceDate DATETIME NOT NULL CONSTRAINT ser_date_cc CHECK(serviceDate > orderDate) ,
+comment VARCHAR(25) NOT NULL,
+bookID INTEGER CONSTRAINT bookID_fk REFERENCES Booking(bookID),
+amID CHAR(10) CONSTRAINT amID_fk REFERENCES Amenity(amID) );
+
+INSERT INTO Customer VALUES (1000, 'Andy', 'David', 'K', '8915367188', 'user1', 'qweasd', 'credict card');
+INSERT INTO Customer VALUES (NULL, 'Austin', 'Ross', 'M', '1233753684', 'user2', 'sdhjhd', 'credict card');
+INSERT INTO Customer VALUES (NULL, 'Brian', 'Martin', 'P', '5082328798', 'user3', 'sjdxdfghjv', 'credict card');
+INSERT INTO Customer VALUES (NULL, 'Tyler', 'Garcia', 'A', '9864752346', 'user4', 'ethxhjj', 'credict card');
+INSERT INTO Customer VALUES (NULL, 'Madison', 'Young', 'A', '4546667821', 'user5', '123dyujgfshm', 'credict card');
+INSERT INTO Customer VALUES (NULL, 'Linda', 'Kaisd', 'b', '45234667821', 'user6', 'sdthjhgfdfg', 'debit card');
+INSERT INTO Customer VALUES (NULL, 'David', 'ZHAO', 'O', '345895655', 'user7', '123dyujgfshm', 'debit card');
+INSERT INTO Customer VALUES (NULL, 'Luck', 'QIAN', 'P', '4567654567', 'user8', 'dftyhyu', 'debit card');
+INSERT INTO Customer VALUES (NULL, 'Poly', 'SUN', 'R', '98767876567', 'user9', 'tfghu76t5rfg', 'credict card');
+INSERT INTO Customer VALUES (NULL, 'Olivia', 'LI', 'W', '623454', 'user10', '8765rfghu', 'cash');
+
+INSERT INTO Amenity VALUES ('A1', 'S');
+INSERT INTO Amenity VALUES ('A2', 'S');
+INSERT INTO Amenity VALUES ('A3', 'S');
+INSERT INTO Amenity VALUES ('A4', 'S');
+INSERT INTO Amenity VALUES ('A5', 'S');
+INSERT INTO Amenity VALUES ('A6', 'S');
+INSERT INTO Amenity VALUES ('A7', 'S');
+INSERT INTO Amenity VALUES ('A8', 'S');
+INSERT INTO Amenity VALUES ('A9', 'S');
+INSERT INTO Amenity VALUES ('A10', 'S');
+INSERT INTO Amenity VALUES ('A11', 'R');
+INSERT INTO Amenity VALUES ('A12', 'R');
+INSERT INTO Amenity VALUES ('A13', 'R');
+INSERT INTO Amenity VALUES ('A14', 'R');
+INSERT INTO Amenity VALUES ('A15', 'R');
+INSERT INTO Amenity VALUES ('A16', 'R');
+INSERT INTO Amenity VALUES ('A17', 'R');
+INSERT INTO Amenity VALUES ('A18', 'R');
+INSERT INTO Amenity VALUES ('A19', 'R');
+INSERT INTO Amenity VALUES ('A20', 'R');
+INSERT INTO Amenity VALUES ('A21', 'E');
+INSERT INTO Amenity VALUES ('A22', 'E');
+INSERT INTO Amenity VALUES ('A23', 'E');
+INSERT INTO Amenity VALUES ('A24', 'E');
+INSERT INTO Amenity VALUES ('A25', 'E');
+INSERT INTO Amenity VALUES ('A26', 'E');
+INSERT INTO Amenity VALUES ('A27', 'E');
+INSERT INTO Amenity VALUES ('A28', 'E');
+INSERT INTO Amenity VALUES ('A29', 'E');
+INSERT INTO Amenity VALUES ('A30', 'E');
+
+INSERT INTO SPA VALUES ('A1', 'Facial 0.5h', 15);
+INSERT INTO SPA VALUES ('A2', 'Facial 1h', 25);
+INSERT INTO SPA VALUES ('A3', 'Facial 1.5h', 35);
+INSERT INTO SPA VALUES ('A4', 'Aroma Massage 0.5h', 50);
+INSERT INTO SPA VALUES ('A5', 'Aroma Massage 1h', 100);
+INSERT INTO SPA VALUES ('A6', 'Aroma Massage 1.5h', 150);
+INSERT INTO SPA VALUES ('A7', 'Swedish massage 0.5h', 75);
+INSERT INTO SPA VALUES ('A8', 'Swedish massage 1h', 125);
+INSERT INTO SPA VALUES ('A9', 'Swedish massage 1.5h', 175);
+INSERT INTO SPA VALUES ('A10', 'Swedish massage 2h', 225);
+
+INSERT INTO  Restaurant VALUES ('A11', 'Tab1', '4 people');
+INSERT INTO  Restaurant VALUES ('A12', 'Tab2', '4 people');
+INSERT INTO  Restaurant VALUES ('A13', 'Tab3', '4 people');
+INSERT INTO  Restaurant VALUES ('A14', 'Tab4', '8 people');
+INSERT INTO  Restaurant VALUES ('A15', 'Tab5', '8 people');
+INSERT INTO  Restaurant VALUES ('A16', 'Tab6', '8 people');
+INSERT INTO  Restaurant VALUES ('A17', 'Tab7', '15 people');
+INSERT INTO  Restaurant VALUES ('A18', 'Tab8', '15 people');
+INSERT INTO  Restaurant VALUES ('A19', 'Tab9', '15 people');
+INSERT INTO  Restaurant VALUES ('A20', 'Tab10', '15 people');
+
+INSERT INTO Excursion VALUES ('A21', 'Beach', 25);
+INSERT INTO Excursion VALUES ('A22', 'Bus station', 50);
+INSERT INTO Excursion VALUES ('A23', 'Train station', 50);
+INSERT INTO Excursion VALUES ('A24', 'Airport', 100);
+INSERT INTO Excursion VALUES ('A25', 'University', 35);
+INSERT INTO Excursion VALUES ('A26', 'Stadium', 70);
+INSERT INTO Excursion VALUES ('A27', 'Hiking trip', 105);
+INSERT INTO Excursion VALUES ('A28', 'Skiing Trip', 140);
+INSERT INTO Excursion VALUES ('A29', 'Park', 15);
+INSERT INTO Excursion VALUES ('A30', 'Water Park', 30);
+
+INSERT INTO RoomType VALUES ('T1', 'Single', '100');
+INSERT INTO RoomType VALUES ('T2', 'Double', '200');
+INSERT INTO RoomType VALUES ('T3', 'Twin', '200');
+INSERT INTO RoomType VALUES ('T4', 'King', '300');
+INSERT INTO RoomType VALUES ('T5', 'Queen', '400');
+
+INSERT INTO Room VALUES ('R1', 'T1');
+INSERT INTO Room VALUES ('R2', 'T1');
+INSERT INTO Room VALUES ('R3', 'T1');
+INSERT INTO Room VALUES ('R4', 'T1');
+INSERT INTO Room VALUES ('R5', 'T1');
+INSERT INTO Room VALUES ('R6', 'T1');
+INSERT INTO Room VALUES ('R7', 'T2');
+INSERT INTO Room VALUES ('R8', 'T2');
+INSERT INTO Room VALUES ('R9', 'T2');
+INSERT INTO Room VALUES ('R10', 'T2');
+INSERT INTO Room VALUES ('R11', 'T2');
+INSERT INTO Room VALUES ('R12', 'T2');
+INSERT INTO Room VALUES ('R13', 'T3');
+INSERT INTO Room VALUES ('R14', 'T3');
+INSERT INTO Room VALUES ('R15', 'T3');
+INSERT INTO Room VALUES ('R16', 'T3');
+INSERT INTO Room VALUES ('R17', 'T3');
+INSERT INTO Room VALUES ('R18', 'T3');
+INSERT INTO Room VALUES ('R19', 'T4');
+INSERT INTO Room VALUES ('R20', 'T4');
+INSERT INTO Room VALUES ('R21', 'T4');
+INSERT INTO Room VALUES ('R22', 'T4');
+INSERT INTO Room VALUES ('R23', 'T4');
+INSERT INTO Room VALUES ('R24', 'T4');
+INSERT INTO Room VALUES ('R25', 'T5');
+INSERT INTO Room VALUES ('R26', 'T5');
+INSERT INTO Room VALUES ('R27', 'T5');
+INSERT INTO Room VALUES ('R28', 'T5');
+INSERT INTO Room VALUES ('R29', 'T5');
+INSERT INTO Room VALUES ('R30', 'T5');
+
+INSERT INTO Booking VALUES (2000, '2019-09-01', '2019-09-10', 1000, 'R1');
+INSERT INTO Booking VALUES (NULL, '2019-09-02', '2019-09-10', 1001, 'R2');
+INSERT INTO Booking VALUES (NULL, '2019-09-03', '2019-09-12', 1002, 'R3');
+INSERT INTO Booking VALUES (null, '2019-09-04', '2019-09-09', 1003, 'R4');
+INSERT INTO Booking VALUES (null, '2019-09-06', '2019-09-07', 1004, 'R7');
+INSERT INTO Booking VALUES (NULL, '2019-09-07', '2019-09-13', 1005, 'R8');
+INSERT INTO Booking VALUES (null, '2019-09-07', '2019-09-11', 1006, 'R8');
+INSERT INTO Booking VALUES (null, '2019-09-09', '2019-09-16', 1007, 'R13');
+INSERT INTO Booking VALUES (null, '2019-09-10', '2019-09-15', 1008, 'R14');
+INSERT INTO Booking VALUES (null, '2019-09-10', '2019-09-20', 1009, 'R19');
+
+INSERT INTO RepairRoom VALUES (3000, 'chair broken', 2000);
+INSERT INTO RepairRoom VALUES (NULL, 'chair broken', 2001);
+INSERT INTO RepairRoom VALUES (NULL, 'desk broken', 2002);
+INSERT INTO RepairRoom VALUES (NULL, 'desk broken', 2003);
+INSERT INTO RepairRoom VALUES (NULL, 'heater broken', 2004);
+INSERT INTO RepairRoom VALUES (NULL, 'heater broken', 2005);
+INSERT INTO RepairRoom VALUES (NULL, 'heater broken', 2006);
+INSERT INTO RepairRoom VALUES (NULL, 'shower broken', 2007);
+INSERT INTO RepairRoom VALUES (NULL, 'shower broken', 2008);
+INSERT INTO RepairRoom VALUES (NULL, 'shower broken', 2009);
+
+INSERT INTO OrderAmn VALUES (4000, '2019-12-11 11:00:00','2019-12-12 12:00:00',  'ASAS', 2000, 'A1');
+INSERT INTO OrderAmn VALUES (NULL, '2019-09-01 11:00:00','2019-09-01 12:00:00', 'in half an hour', 2001, 'A2');
+INSERT INTO OrderAmn VALUES (NULL, '2019-09-01 11:00:00','2019-09-01 12:00:00', 'ASAS', 2002, 'A4');
+INSERT INTO OrderAmn VALUES (NULL, '2019-09-01 11:00:00','2019-09-01 12:00:00', 'ASAS', 2003, 'A6');
+INSERT INTO OrderAmn VALUES (NULL, '2019-09-01 11:00:00','2019-09-01 12:00:00', 'order for every day', 2004, 'A9');
+INSERT INTO OrderAmn VALUES (NULL, '2019-09-01 11:00:00','2019-09-01 12:00:00', 'ASAS', 2005, 'A12');
+INSERT INTO OrderAmn VALUES (NULL, '2019-09-01 11:00:00','2019-09-01 12:00:00', 'make an appointment for tomorrow', 2006, 'A16');
+INSERT INTO OrderAmn VALUES (NULL, '2019-09-01 11:00:00','2019-09-01 12:00:00', 'ASAS', 2007, 'A19');
+INSERT INTO OrderAmn VALUES (NULL, '2019-09-01 11:00:00','2019-09-01 12:00:00', 'twice a day', 2008, 'A22');
+INSERT INTO OrderAmn VALUES (NULL, '2019-09-01 11:00:00','2019-09-01 12:00:00', '10min later', 2009, 'A30');
+
+.output stdout
+.echo off

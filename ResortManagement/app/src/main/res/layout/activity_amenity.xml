@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ReserveMenu">
+
+    <TextView
+        android:id="@+id/amenity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/amenity"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        />
+
+    <Button
+        android:id="@+id/excursion_btn"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="@string/Excursions"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        style="@style/ButtonStyle"/>
+    <Button
+        android:id="@+id/restaurant_btn"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="@string/Restaurant"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        style="@style/ButtonStyle"/>
+    <Button
+        android:id="@+id/spa_btn"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="@string/spa"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        style="@style/ButtonStyle"/>
+
+
+
+</LinearLayout>
